@@ -1,0 +1,21 @@
+---
+
+- name: configure motion
+  lineinfile:
+    path: /etc/motion/motion.conf
+    regexp: "^{{ item }}"
+    line: "{{ item }}"
+  with_items: "{{ motion_configuration }}"
+  tags:
+    - install
+    - configure
+
+- name: restart motion service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: motion
+  tags:
+    - install
+    - configure
+    - restart

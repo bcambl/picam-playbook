@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  user: pi
+  become: true
+  vars_files:
+    - settings.yml
+  tasks:
+    - import_tasks: tasks/install.yml
+    - import_tasks: tasks/configure.yml

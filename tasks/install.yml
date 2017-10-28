@@ -1,0 +1,44 @@
+---
+
+  - name: install packages
+    package:
+      name: "{{ item }}"
+      state: installed
+    with_items:
+      - motion
+      - vim
+    tags:
+      - install
+
+  - name: enable bcm2835-v4l2 module
+    modprobe:
+      name: bcm2835-v4l2
+      state: present
+    tags:
+      - install
+
+  - name: enable camera drivers for future boot
+    lineinfile:
+      path: /etc/modules
+      regexp: '^bcm2835-v4l2'
+      line: 'bcm2835-v4l2'
+    tags:
+      - install
+
+  - name: create /motion directory
+    file:
+      path: /motion
+      state: directory
+      owner: motion
+      group: motion
+      mode: 0775
+    tags:
+      - install
+
+  - name: enable motion daemon
+    lineinfile:
+      path: /etc/default/motion
+      regexp: "^start_motion_daemon="
+      line: "start_motion_daemon=yes"
+    tags:
+      - install
