@@ -10,14 +10,14 @@
     tags:
       - install
 
-  - name: enable bcm2835-v4l2 module
+  - name: enable bcm2835-v4l2 module in runtime
     modprobe:
       name: bcm2835-v4l2
       state: present
     tags:
       - install
 
-  - name: enable camera drivers for future boot
+  - name: enable bcm2835-v4l2 on boot
     lineinfile:
       path: /etc/modules
       regexp: '^bcm2835-v4l2'
@@ -25,13 +25,16 @@
     tags:
       - install
 
-  - name: create /motion directory
+  - name: create /motion directories
     file:
-      path: /motion
+      path: "{{ item }}"
       state: directory
       owner: motion
       group: motion
       mode: 0775
+    with_items:
+      - /motion
+      - /motion/captures
     tags:
       - install
 
