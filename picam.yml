@@ -8,3 +8,4 @@
   tasks:
     - import_tasks: tasks/install.yml
     - import_tasks: tasks/configure.yml
+    - import_tasks: tasks/uninstall.yml

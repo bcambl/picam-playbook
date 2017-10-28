@@ -1,0 +1,49 @@
+---
+  - name: check tags
+    shell: /bin/true
+    register: excluded_tags
+    tags:
+      - install
+      - configure
+
+  - name: uninstall packages
+    package:
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - motion
+    when: excluded_tags is not defined
+    tags:
+      - uninstall
+
+  - name: disable bcm2835-v4l2 on boot
+    lineinfile:
+      path: /etc/modules
+      regexp: '^bcm2835-v4l2'
+      state: absent
+    when: excluded_tags is not defined
+    tags:
+      - uninstall
+
+  - name: remove /motion directories
+    file:
+      path: "{{ item }}"
+      state: absent
+      owner: motion
+      group: motion
+      mode: 0775
+    when: excluded_tags is not defined
+    with_items:
+      - /motion
+    tags:
+      - uninstall
+
+  - name: disable motion service
+    systemd:
+      name: motion
+      state: stopped
+      daemon_reload: yes
+      enabled: no
+    when: excluded_tags is not defined
+    tags:
+      - uninstall

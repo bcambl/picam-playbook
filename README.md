@@ -43,3 +43,8 @@ Modify motion settings in `settings.yml` then execute
 ansible-playbook -i hosts picam.yml --tags configure
 ```
 The `motion` service will be restarted after the configurations have been updated.
+
+### Uninstall
+```
+ansible-playbook -i hosts picam.yml --tags uninstall
+```
