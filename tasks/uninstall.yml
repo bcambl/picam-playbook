@@ -2,6 +2,7 @@
   - name: check tags
     shell: /bin/true
     register: excluded_tags
+    changed_when: False
     tags:
       - install
       - configure

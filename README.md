@@ -15,6 +15,7 @@ sudo easy_install pip
 sudo pip install ansible
 ```
 
+###### Note: ansible >= 2.4
 ---
 
 ### Instructions

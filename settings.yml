@@ -13,6 +13,14 @@ motion_configuration:
   - "target_dir /motion/captures"
   - "logfile /motion/motion.log"
   - "process_id_file /motion/motion.pid"
+  - "videodevice /dev/video0"
+
+  # Disable saving of images upon motion capture
+  - "output_pictures off"
+  # Disable saving of movies upon motion capture
+  - "ffmpeg_output_movies off"
+
+  # Other Options:
   # - "auto_brightness off"
   # - "brightness 0"
   # - "contrast 0"
@@ -22,7 +30,6 @@ motion_configuration:
   # - "ffmpeg_bps 400000"
   # - "ffmpeg_duplicate_frames true"
   # - "ffmpeg_output_debug_movies off"
-  # - "ffmpeg_output_movies on"
   # - "ffmpeg_timelapse 0"
   # - "ffmpeg_timelapse_mode daily"
   # - "ffmpeg_variable_bitrate 0"
@@ -48,7 +55,6 @@ motion_configuration:
   # - "noise_tune on"
   # - "norm 0"
   # - "output_debug_pictures off"
-  # - "output_pictures on"
   # - "picture_filename %v-%Y%m%d%H%M%S-%q"
   # - "picture_type jpeg"
   # - "power_line_frequency -1"
@@ -88,6 +94,5 @@ motion_configuration:
   # - "track_type 0"
   # - "use_extpipe off"
   # - "v4l2_palette 17"
-  # - "videodevice /dev/video0"
   # - "webcontrol_html_output on"
   # - "webcontrol_port 8080"
